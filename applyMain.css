@@ -1,0 +1,85 @@
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  overflow: hidden;
+}
+.section1 {
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  text-align: center;
+  padding-top: 100px;
+}
+.ipadbg {
+  width: 600px;
+  height: 450px;
+  background:url(./image/ipad1.png);
+  filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+  -moz-background-size:100% 100%;
+  background-size:100% 100%;
+  /*position: absolute;*/
+  overflow: hidden;
+  margin-left: calc((100% - 600px)/2);
+  /*margin-top: 100px;*/
+  padding: 26px;
+  position: absolute;
+  box-sizing: border-box;
+
+}
+.ipad_cover {
+  width: 100%;
+  height: 100%;
+  background:url(./image/ipad2.png);
+  filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+  -moz-background-size:100% 100%;
+  background-size:100% 100%;
+  /*position: absolute;*/
+
+}
+.flex_c{display: flex;flex-direction: row;align-items: center;flex-wrap: wrap;justify-content:center;}
+.flex_l{display: flex;flex-direction: row;align-items: center;flex-wrap: wrap;justify-content:flex-start;}
+.flex_r{display: flex;flex-direction: row;align-items: center;flex-wrap: wrap;justify-content:flex-end;}
+.flex_s{display: flex;flex-direction: row;align-items: center;flex-wrap: wrap;justify-content:space-between;}
+.flex_t{display: flex;flex-direction: row;flex-wrap: wrap;justify-content:center;}
+
+.fast_title{
+  font-size: 50px;
+  opacity:0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+.leftLine
+{
+  height: 2px;
+  background: white;
+  width: 100px;
+  transform:rotate(14deg);
+  margin-top: 200px;
+  margin-left: 300px;
+
+}
+.centerText{
+  font-size: 40px;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+color: white;
+  position: absolute;
+  line-height: 100vh;
+  top: 40px;
+}
+
+.tag {
+  position: fixed;
+  font-size: 20px;
+  top: 15px;
+  left: 15px;
+  color: black;
+  z-index: 99;
+  opacity:0.5;
+}

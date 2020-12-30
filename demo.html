@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>简单模仿苹果首页</title>
+
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.3/ScrollMagic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.3/plugins/animation.gsap.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.3/plugins/debug.addIndicators.js"></script>-->
+
+    <link rel="stylesheet" href="./applyMain.css">
+    <style type="text/css">
+        #pinContainer {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .panel {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            padding: 50px 100px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .panel img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .color1 {
+            background-color: lightgreen;
+        }
+
+        .color2 {
+            background-color: white;
+        }
+
+        .color3 {
+            background-color: lightsalmon;
+        }
+
+        .color4 {
+            background-color: lightseagreen;
+        }
+
+        .centertext {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="controller">
+        <div class="section1" id="sectionController">
+            <div class="ipadbg" id="ipadbg">
+                <div style="width: 100%;height: 100%;overflow: hidden;position: relative">
+                    <div id="ipad_cover" class="ipad_cover">
+                    </div>
+                </div>
+            </div>
+            <div id="centerTextA" class="centerText">张莹东的博客</div>
+            <div class="fast_title" id="fast_title">快速，简单，安全的触控</div>
+        </div>
+        <script>
+            $(function () {
+                // init
+                var controller = new ScrollMagic.Controller();
+                var wipeAnimation = new TimelineMax()
+                    .fromTo("#ipad_cover", 8, { marginTop: "0" }, { marginTop: "-400px", ease: Linear.easing }) // cover to Top
+                    .fromTo("#fast_title", 2, { opacity: "0", top: "650px" }, { opacity: "1", marginTop: "500px", ease: Linear.easing }) // text show
+                    // .fromTo("#fast_title",3, {top: "650px"}, {marginTop: "500px", ease: Linear.easing}) // text to bottom
+                    .fromTo("#ipadbg", 10, { scale: "1" }, { scale: "5", ease: Linear.easing }) // bg to scale
+                // .fromTo("#centerTextA", 2, {fontSize: "16"}, {fontSize: "56", ease: Linear.easing}); // center to
+                new ScrollMagic.Scene({
+                    triggerElement: "#sectionController",
+                    triggerHook: "onLeave",
+                    duration: "300%"
+                }).setPin("#sectionController")
+                    .setTween(wipeAnimation)
+                    .addIndicators()
+                    .addTo(controller);
+
+                //添加到8秒钟处
+                wipeAnimation.addCallback(function () {
+                    console.log('ipad_cover 8 加载完毕')
+                    wipeAnimation.add(new TweenLite("#centerTextA", 20, { fontSize: "156", ease: Linear.easing }), "#ipad_cover");
+
+                }, 8);
+                // //添加到"myLabel" 标签处
+                wipeAnimation.addCallback(function () {
+                    console.log('加载到 fast_title 了')
+                }, "#ipad_cover"); //添加到3秒钟处
+
+                wipeAnimation.addLabel("spin", 10);
+                // wipeAnimation.add( new TweenLite("#centerTextA", 20,{fontSize: "156", ease: Linear.easing}), "spin");
+
+                //在时间轴中插入另一个时间轴
+                // var nested = new TimelineMax();
+                // nested.to("#centerTextA", 1, {left:200})
+                // wipeAnimation.add(nested)
+
+
+            });
+        </script>
+        <div id="pinContainer" style="overflow: hidden">
+            <section class="panel blue">
+                <img src="./image/pan1.png" />
+            </section>
+            <section class="panel turqoise">
+                <img src="./image/pan2.png" />
+            </section>
+            <section class="panel green">
+                <img src="./image/pan3.png" />
+            </section>
+            <section class="panel bordeaux">
+                <img src="./image/pan4.png" />
+            </section>
+            <section class="panel" id="end">
+                <img src="./image/pan4.png" />
+            </section>
+        </div>
+        <div class="foot">
+        </div>
+        <script>
+            $(function () {
+                var controller = new ScrollMagic.Controller();
+                var wipeAnimation = new TimelineMax()
+                    .fromTo("section.panel.turqoise", 1, { x: "-100%" }, { x: "0%", ease: Linear.easeNone }).call(function () {
+                        console.log('第一个执行完了')
+                    })
+                    .fromTo("section.panel.green", 1, { x: "100%" }, { x: "0%", ease: Linear.easeNone })
+                    .fromTo("section.panel.bordeaux", 1, { y: "-110%" }, { y: "0%", ease: Linear.easeNone })
+                    .fromTo("section.panel.bordeaux", 1, { width: "100%" }, { width: "100%", ease: Linear.easeNone })
+                    .fromTo("#end", 1, { y: "100%" }, { y: "0%", ease: Linear.easeNone })
+                    .fromTo("#centertext", 2, { fontSize: "16" }, { fontSize: "166", ease: Linear.easing });
+                new ScrollMagic.Scene({
+                    triggerElement: "#pinContainer",
+                    triggerHook: "onLeave",
+                    duration: "300%"
+                })
+                    .setPin("#pinContainer")
+                    .setTween(wipeAnimation)
+                    .addIndicators()
+                    .addTo(controller);
+
+            });
+        </script>
+    </div>
+</body>
+
+</html>
